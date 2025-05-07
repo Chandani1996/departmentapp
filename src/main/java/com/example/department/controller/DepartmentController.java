@@ -1,6 +1,6 @@
 package com.example.department.controller;
 
-import com.example.department.entity.Department;
+import com.example.department.entity.Departments;
 import com.example.department.model.DepartmentRequestBody;
 import com.example.department.model.DepartmentResponseBody;
 import com.example.department.service.DepartmentService;
@@ -21,14 +21,14 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments")
-    public List<Department> fetchDepartmentList(){
+    public List<Departments> fetchDepartmentList(){
         return departmentService.fetchDepartmentList();
     }
 
     @PutMapping("/departments/{id}")
-    public Department updateDepartment(@RequestBody Department department, @PathVariable("id") Long departmentId)
+    public Departments updateDepartment(@RequestBody Departments departments, @PathVariable("id") Long departmentId)
     {
-        return departmentService.updateDepartment(department,departmentId);
+        return departmentService.updateDepartment(departments,departmentId);
     }
 
     @DeleteMapping("/departments/{id}")

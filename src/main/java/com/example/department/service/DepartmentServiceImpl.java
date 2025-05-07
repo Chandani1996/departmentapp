@@ -1,6 +1,6 @@
 package com.example.department.service;
 
-import com.example.department.entity.Department;
+import com.example.department.entity.Departments;
 import com.example.department.model.DepartmentRequestBody;
 import com.example.department.model.DepartmentResponseBody;
 import com.example.department.repository.DepartmentRepository;
@@ -18,42 +18,42 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentResponseBody saveDepartment(DepartmentRequestBody departmentRequest) {
-        Department request = new Department();
+        Departments request = new Departments();
         request.setDepartmentId(departmentRequest.getDepartmentId());
         request.setDepartmentCodes(departmentRequest.getDepartmentCodes());
         request.setDepartmentName(departmentRequest.getDepartmentName());
         request.setDepartmentAddress(departmentRequest.getDepartmentAddress());
 
-        Department department = departmentRepository.save(request);
+        Departments departments = departmentRepository.save(request);
 
         DepartmentResponseBody respose = new DepartmentResponseBody();
-        respose.setDepartmentId(department.getDepartmentId());
-        respose.setDepartmentCodes(department.getDepartmentCodes());
-        respose.setDepartmentName(department.getDepartmentName());
-        respose.setDepartmentAddress(department.getDepartmentAddress());
+        respose.setDepartmentId(departments.getDepartmentId());
+        respose.setDepartmentCodes(departments.getDepartmentCodes());
+        respose.setDepartmentName(departments.getDepartmentName());
+        respose.setDepartmentAddress(departments.getDepartmentAddress());
 
         return  respose;
     }
 
     @Override
-    public List<Department> fetchDepartmentList() {
-        return (List<Department>)
+    public List<Departments> fetchDepartmentList() {
+        return (List<Departments>)
                 departmentRepository.findAll();
     }
 
     @Override
-    public Department updateDepartment(Department department, Long departmentId) {
+    public Departments updateDepartment(Departments departments, Long departmentId) {
 
-        Department depDB= departmentRepository.findById(departmentId).get();
+        Departments depDB= departmentRepository.findById(departmentId).get();
 
-        if(Objects.nonNull(department.getDepartmentName())&& ! " ".equalsIgnoreCase(department.getDepartmentName())){
-            depDB.setDepartmentName(department.getDepartmentName());
+        if(Objects.nonNull(departments.getDepartmentName())&& ! " ".equalsIgnoreCase(departments.getDepartmentName())){
+            depDB.setDepartmentName(departments.getDepartmentName());
         }
-        if(Objects.nonNull(department.getDepartmentAddress())&& ! " ".equalsIgnoreCase(department.getDepartmentAddress())){
-            depDB.setDepartmentAddress(department.getDepartmentAddress());
+        if(Objects.nonNull(departments.getDepartmentAddress())&& ! " ".equalsIgnoreCase(departments.getDepartmentAddress())){
+            depDB.setDepartmentAddress(departments.getDepartmentAddress());
         }
-        if(Objects.nonNull(department.getDepartmentCodes())&& ! " ".equalsIgnoreCase(department.getDepartmentCodes())){
-            depDB.setDepartmentCodes(department.getDepartmentCodes());
+        if(Objects.nonNull(departments.getDepartmentCodes())&& ! " ".equalsIgnoreCase(departments.getDepartmentCodes())){
+            depDB.setDepartmentCodes(departments.getDepartmentCodes());
         }
         return departmentRepository.save(depDB);
     }
