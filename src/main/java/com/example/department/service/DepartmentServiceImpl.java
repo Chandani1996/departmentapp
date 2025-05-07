@@ -1,6 +1,8 @@
 package com.example.department.service;
 
 import com.example.department.entity.Department;
+import com.example.department.model.DepartmentRequestBody;
+import com.example.department.model.DepartmentResponseBody;
 import com.example.department.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,22 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentRepository departmentRepository;
 
     @Override
-    public Department saveDepartment(Department department) {
-        return departmentRepository.save(department);
+    public DepartmentResponseBody saveDepartment(DepartmentRequestBody departmentRequest) {
+        Department request = new Department();
+        request.setDepartmentId(departmentRequest.getDepartmentId());
+        request.setDepartmentCodes(departmentRequest.getDepartmentCodes());
+        request.setDepartmentName(departmentRequest.getDepartmentName());
+        request.setDepartmentAddress(departmentRequest.getDepartmentAddress());
+
+        Department department = departmentRepository.save(request);
+
+        DepartmentResponseBody respose = new DepartmentResponseBody();
+        respose.setDepartmentId(department.getDepartmentId());
+        respose.setDepartmentCodes(department.getDepartmentCodes());
+        respose.setDepartmentName(department.getDepartmentName());
+        respose.setDepartmentAddress(department.getDepartmentAddress());
+
+        return  respose;
     }
 
     @Override
