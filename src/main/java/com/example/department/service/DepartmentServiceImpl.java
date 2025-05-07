@@ -1,6 +1,6 @@
 package com.example.department.service;
 
-import com.example.department.entity.MyDepartment;
+import com.example.department.entity.Department;
 import com.example.department.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,29 +15,29 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentRepository departmentRepository;
 
     @Override
-    public MyDepartment saveDepartment(MyDepartment myDepartment) {
-        return departmentRepository.save(myDepartment);
+    public Department saveDepartment(Department department) {
+        return departmentRepository.save(department);
     }
 
     @Override
-    public List<MyDepartment> fetchDepartmentList() {
-        return (List<MyDepartment>)
+    public List<Department> fetchDepartmentList() {
+        return (List<Department>)
                 departmentRepository.findAll();
     }
 
     @Override
-    public MyDepartment updateDepartment(MyDepartment myDepartment, Long departmentId) {
+    public Department updateDepartment(Department department, Long departmentId) {
 
-        MyDepartment depDB= departmentRepository.findById(departmentId).get();
+        Department depDB= departmentRepository.findById(departmentId).get();
 
-        if(Objects.nonNull(myDepartment.getDepartmentName())&& ! " ".equalsIgnoreCase(myDepartment.getDepartmentName())){
-            depDB.setDepartmentName(myDepartment.getDepartmentName());
+        if(Objects.nonNull(department.getDepartmentName())&& ! " ".equalsIgnoreCase(department.getDepartmentName())){
+            depDB.setDepartmentName(department.getDepartmentName());
         }
-        if(Objects.nonNull(myDepartment.getDepartmentAddress())&& ! " ".equalsIgnoreCase(myDepartment.getDepartmentAddress())){
-            depDB.setDepartmentAddress(myDepartment.getDepartmentAddress());
+        if(Objects.nonNull(department.getDepartmentAddress())&& ! " ".equalsIgnoreCase(department.getDepartmentAddress())){
+            depDB.setDepartmentAddress(department.getDepartmentAddress());
         }
-        if(Objects.nonNull(myDepartment.getDepartmentCodes())&& ! " ".equalsIgnoreCase(myDepartment.getDepartmentCodes())){
-            depDB.setDepartmentCodes(myDepartment.getDepartmentCodes());
+        if(Objects.nonNull(department.getDepartmentCodes())&& ! " ".equalsIgnoreCase(department.getDepartmentCodes())){
+            depDB.setDepartmentCodes(department.getDepartmentCodes());
         }
         return departmentRepository.save(depDB);
     }
