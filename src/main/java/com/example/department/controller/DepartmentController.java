@@ -1,6 +1,8 @@
 package com.example.department.controller;
 
 import com.example.department.entity.Department;
+import com.example.department.model.DepartmentRequestBody;
+import com.example.department.model.DepartmentResponseBody;
 import com.example.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -14,8 +16,8 @@ public class DepartmentController {
     @Autowired private DepartmentService departmentService;
 
     @PostMapping("/departments")
-    public Department saveDepartment(@Validated @RequestBody Department department){
-        return  departmentService.saveDepartment(department);
+    public DepartmentResponseBody saveDepartment(@Validated @RequestBody DepartmentRequestBody departmentRequest){
+        return  departmentService.saveDepartment(departmentRequest);
     }
 
     @GetMapping("/departments")
